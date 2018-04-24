@@ -1,4 +1,6 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic.edit import FormView
 
 from uptodo.constants import TemplateName
@@ -21,4 +23,6 @@ class TaskView(FormView):
         post the tasks using this method
         handles both CreateView and UpdateView
         """
-        return
+        if self.form_class(request.POST).is_valid():
+            TodoHandler().handle_task_post(request, pk)
+        return HttpResponseRedirect(reverse('tasks', kwargs = {'pk': pk}))
