@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <div>
+    <strong>Parent task->->-Task title ->->- due date ->->- status</strong><br>
+    {% for object in objects %}
+      {{ object.task }}->->-{{ object.title }}->->-{{ object.due_date }}->->-{{ object.status }}<br><br>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,9 +1,11 @@
 from django.db import models
 
+from base.models import SoftDeletionModel
+
 from uptodo.choices import TaskStatus
 
 
-class TodoTask(models.Model):
+class TodoTask(SoftDeletionModel):
     task = models.ForeignKey(
         'self',
         on_delete=models.CASCADE,

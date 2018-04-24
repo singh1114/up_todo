@@ -1,5 +1,11 @@
-from base.handlers.form_handlers import FormHandler
+import requests
+
+from django.urls import reverse
 from django.http import HttpResponseServerError
+
+from base.handlers.form_handlers import FormHandler
+
+from django.conf import settings
 
 from uptodo.dbio import TodoTaskDbIO
 
@@ -33,3 +39,11 @@ class TodoHandler:
             return HttpResponseServerError()
         TodoTaskDbIO().create_object(data_dict)
         return
+
+    def delete_task(self, pk):
+        TodoTaskDbIO().delete_object({'pk': pk})
+
+    def search_tasks(self, title):
+        response = requests.get(settings.BASE_URL + '/todo/task/?format=json&title__icontains=Sub')
+        #import ipdb; ipdb.set_trace()
+        return response.json()

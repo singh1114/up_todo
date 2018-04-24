@@ -25,7 +25,7 @@ class CustomModelResource(ModelResource):
 
 class TodoResource(CustomModelResource):
     class Meta:
-        queryset = TodoTask.objects.all()
+        queryset = TodoTask.objects.filter(deleted_at__isnull=True)
         resource_name = 'task'
         fields = ['title', 'due_date', 'status']
         filtering = {

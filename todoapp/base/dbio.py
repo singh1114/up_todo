@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -20,4 +22,8 @@ class AbstractDbIO:
         return model_obj.save()
 
     def create_object(self, kwargs):
-        return self.model.save()
+        return self.model.objects.create(**kwargs)
+
+    def delete_object(self, kwargs):
+        model_obj = self.get_object(kwargs)
+        return self.update_object(model_obj, {'deleted_at': timezone.now()})

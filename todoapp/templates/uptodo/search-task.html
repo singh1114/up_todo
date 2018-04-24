@@ -12,9 +12,6 @@
           <div class="col-md-9">{{ field }}</div>
         </div>
       {% endfor %}
-    <input type="submit" value="submit" />
-    {% if pk %}
-    <a href="{% url 'delete-task' pk=pk %}">DELETE TASK</a>
-    {% endif %}
+    <input type="submit" value="SEARCH" />
   </div>
 {% endblock %}
