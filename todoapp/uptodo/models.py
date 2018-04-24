@@ -14,6 +14,5 @@ class TodoTask(models.Model):
     title = models.CharField(max_length=3000)
     status = models.CharField(
         max_length=1,
-        choices=TaskStatus.choices,
-        default=
+        choices=TaskStatus.choices
     )
