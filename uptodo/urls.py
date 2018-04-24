@@ -3,5 +3,5 @@ from uptodo.api.api import TodoResource
 
 
 urlpatterns = [
-    url(r'^todo/?', include(TodoResource().urls)),
+    url(r'^todo/?', include(TodoResource().urls), name='todores'),
 ]

@@ -12,4 +12,8 @@ class TodoTask(models.Model):
     )
     due_date = models.DateField()
     title = models.CharField(max_length=3000)
-    status = models.CharField(max_length=1, choices=TaskStatus.choices)
+    status = models.CharField(
+        max_length=1,
+        choices=TaskStatus.choices,
+        default=
+    )
