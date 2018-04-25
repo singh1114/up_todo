@@ -136,6 +136,6 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     'delete_task': {
         'task': 'uptodo.tasks.auto_delete',
-        'schedule': crontab(minute=41, hour=18)
+        'schedule': crontab(minute=59, hour=23)
     }
 }
