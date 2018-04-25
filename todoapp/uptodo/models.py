@@ -18,3 +18,6 @@ class TodoTask(SoftDeletionModel):
         max_length=1,
         choices=TaskStatus.choices
     )
+
+    def __str__(self):
+        return self.title

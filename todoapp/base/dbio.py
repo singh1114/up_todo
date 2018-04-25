@@ -16,6 +16,9 @@ class AbstractDbIO:
         except ObjectDoesNotExist:
             return None
 
+    def filter_objects(self, kwargs):
+        return self.model.objects.filter(**kwargs)
+
     def update_object(self, model_obj, kwargs):
         for key, value in kwargs.items():
             setattr(model_obj, key, value)

@@ -1,3 +1,5 @@
+import arrow
+
 import requests
 
 from django.urls import reverse
@@ -44,6 +46,24 @@ class TodoHandler:
         TodoTaskDbIO().delete_object({'pk': pk})
 
     def search_tasks(self, title):
-        response = requests.get(settings.BASE_URL + '/todo/task/?format=json&title__icontains=Sub')
-        #import ipdb; ipdb.set_trace()
+        response = requests.get(settings.BASE_URL +
+            '/todo/task/?format=json&title__icontains={}'.format(title))
+        return response.json()
+
+    def filter_tasks(self, string):
+        if string == 'today':
+            today = arrow.utcnow().format('YYYY-MM-DD')
+            response = requests.get(settings.BASE_URL +
+                '/todo/task/?format=json&due_date={}'.format(today))
+        if string == 'thisweek':
+            week_last = arrow.utcnow().shift(days=-7).format('YYYY-MM-DD')
+            week_first = arrow.utcnow().format('YYYY-MM-DD')
+            response = requests.get(settings.BASE_URL +
+                '/todo/task/?format=json&due_date__gte={}&due_date__lte={}'
+                .format(week_last, week_first))
+        if string == 'overdue':
+            today = arrow.utcnow().format('YYYY-MM-DD')
+            response = requests.get(settings.BASE_URL +
+                '/todo/task/?format=json&due_date__lt={}&status=P'
+                .format(today))
         return response.json()

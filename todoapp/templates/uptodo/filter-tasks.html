@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <div>
+    <a href="{% url 'filter' string='today' %}">TODAY</a><br>
+    <a href="{% url 'filter' string='thisweek' %}">THIS WEEK</a><br>
+    <a href="{% url 'filter' string='overdue' %}">OVERDUE</a><br>
+  </div>
+{% endblock %}

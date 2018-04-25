@@ -30,5 +30,6 @@ class TodoResource(CustomModelResource):
         fields = ['title', 'due_date', 'status']
         filtering = {
             'title': ALL,
-            'due_date': ['in', '__not_eq']
+            'due_date': ALL,
+            'status': ALL
         }

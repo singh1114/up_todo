@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 
 from uptodo.api.api import TodoResource
 from uptodo.constants import TemplateName
-from uptodo.views import DeleteTask, SearchTasks, TaskView
+from uptodo.views import DeleteTask, FilterTasks, SearchTasks, TaskView
 
 
 urlpatterns = [
@@ -14,4 +14,8 @@ urlpatterns = [
     url(r'^delete-task/(?P<pk>\d+)$', DeleteTask.as_view(),
         name='delete-task'),
     url(r'^search/?', SearchTasks.as_view(), name='search'),
+    url(r'^filter/(?P<string>\w+)$', FilterTasks.as_view(),
+        name='filter'),
+    url(r'^filter-option/?', TemplateView.as_view(
+        template_name=TemplateName.FILTER_OPTIONS), name='filter-option'),
 ]

@@ -55,13 +55,8 @@ class SearchTasks(FormView):
 class FilterTasks(FormView):
     form_class = SearchTaskForm
 
-    def get(self, request, *args, **kwargs):
-        return render(request, TemplateName.SEARCH_TASK, {
-            'form': self.form_class})
-
-    def post(self, request, *args, **kwarsgs):
-        if self.form_class(request.POST).is_valid():
-            result = TodoHandler().search_tasks(request.POST['title'])
-            objects = result['objects']
-            return render(request, TemplateName.SEARCH_RESULTS, {
-                'objects': objects})
+    def get(self, request, string='', *args, **kwargs):
+        result = TodoHandler().filter_tasks(string)
+        objects = result['objects']
+        return render(request, TemplateName.SEARCH_RESULTS, {
+            'objects': objects})
